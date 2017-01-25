@@ -1,0 +1,147 @@
+body {
+    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    margin: 0;
+    background: #222
+}
+body::-webkit-scrollbar {
+    display: none
+}
+a {
+    text-decoration: none;
+    color: #eee
+}
+.section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center
+}
+@media only screen and (max-width: 45em) {
+    .list {
+        max-width: 95vw;
+        margin: 0 5px
+    }
+    .textbox {
+        width: 90vw
+    }
+    .list ul {
+        -webkit-transition: 800ms max-height ease-out;
+        transition: 800ms max-height ease-out;
+        overflow: hidden;
+        max-height: 0;
+        transition-delay: .2s
+    }
+    .list:hover ul li,
+    .list:hover>ul {
+        max-height: 800px;
+        display: block
+    }
+    .list ul li {
+        display: none
+    }
+}
+.container {
+    text-align: center;
+    margin-top: 15%;
+}
+.google {
+    margin: -50px auto -25px;
+    height: 200px;
+    transition: opacity ease-in-out .5s;
+    opacity: .8
+}
+.google:hover {
+    opacity: 1
+}
+
+#clock {
+    width: 100%;
+    font-family: Roboto;
+    font-size: 5.5rem;
+    color: #eee;
+    margin-top: 5%;
+}
+
+#info{
+  width: 910px;
+  height: 50px;
+  //background-color: #c79e4c;
+  margin-left: auto;
+  margin-right: auto;
+  position: relative;
+  top: 350px;
+
+}
+
+#dateInfo{
+  position: absolute;
+  height: inherit;
+  width: 165px;
+  right: 0px;
+  top: 0px;
+  //opacity: .5;
+  //background-color: #ffffff;
+}
+
+#day{
+  position: absolute;
+  right: 0px;
+  font-size: 27px;
+  font-family: Masiode;
+
+  text-shadow:
+  -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: #ffffff;
+}
+
+#weather{
+  height: inherit;
+  width: 120px;
+  position: inherit;
+  //background-color: #06cf28;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 5%;
+}
+
+#temperature{
+  font-size: 60px;
+  font-family: Masiode;
+  font-weight: bolder;
+
+  text-shadow:
+  -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000;
+  color: #ffffff;
+}
+
+#time{
+  width: 100%;
+  font-family: Roboto;
+  font-size: 5.5rem;
+  color: #eee;
+}
+
+#date{
+  width: 100%;
+  font-family: Roboto;
+  font-size: 3rem;
+  color: #eee;
+}
+
+#main {
+   min-height:100%;
+   position:relative;
+}
+#content {
+}
+#footer {
+   position:absolute;
+   bottom:0;
+   width:100%;
+   height:70px;
+}
