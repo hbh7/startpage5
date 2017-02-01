@@ -7,8 +7,8 @@ window.onload = function() {
     colors = [];
 
     dateInfo()
-    getWeather();
-
+    //getWeather();
+    dispayWeather(weather);
 }
 
 function getConfig() {
@@ -120,8 +120,12 @@ function getWeather(){
 }
 
 function dispayWeather(weather){
-  var temp = Math.round((weather.temp*1.8) - 459.4);
-  var conditions = weather.condition;
+
+  console.log("New Condition: ", weather.conditions);
+  console.log("New Condition: ", weather.temp);
+
+  var temp = Math.round(weather.temp);
+  var conditions = weather.conditions;
   var tempDisplay = document.getElementById("temperature");
   var conditionsDisplay = document.getElementById("conditions");
   console.log(conditionsDisplay);
@@ -129,56 +133,45 @@ function dispayWeather(weather){
 
 
   tempDisplay.innerHTML = temp + "°  ";
-  if(conditions == "clear sky"){
-    conditionsDisplay.alt = "Clear Skies";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/sun.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/moon.png";
-    }
-  }else if(conditions == "few clouds"){
-    conditionsDisplay.alt = "Cloudy";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/partly cloudy day.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/partly cloudy night.png";
-    }
-  }else if(conditions == "scattered clouds"){
-    conditionsDisplay.alt = "Scattered Clouds";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/partly cloudy day.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/partly cloudy night.png";
-    }
-  }else if(conditions == "broken clouds"){
-    conditionsDisplay.alt = "Broken Clouds";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/partly cloudy day.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/partly cloudy night.png";
-    }
-  }else if(conditions == "light rain"){
-    conditionsDisplay.alt = "Light Rain";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/light rain.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/light raint.png";
-    }
-  }else if(conditions == "moderate rain"){
-    conditionsDisplay.alt = "Moderate Rain";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/rain.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/rain.png";
-    }
-  }else if(conditions == "overcast clouds"){
-    conditionsDisplay.alt = "Light Rain";
-    if(new Date().getHours() <= 18){
-      conditionsDisplay.src = "resources/icons/clouds.png";
-    }else{
-      conditionsDisplay.src = "resources/icons/clouds.png";
-    }
+
+  var skycons = new Skycons({"color": "white"});
+
+
+  if (conditions == "cloudy") {
+      conditionsDisplay.alt = "Cloudy";
+      skycons.add("conditions", Skycons.CLOUDY);
+  } else if (conditions == "clear-day") {
+      conditionsDisplay.alt = "Clear Skies";
+      skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
+  } else if (conditions == "clear-night") {
+      conditionsDisplay.alt = "Clear Skies";
+      skycons.add(document.getElementById("conditions"), Skycons.CLEAR_NIGHT);
+  } else if (conditions == "Rain") {
+      conditionsDisplay.alt = "Rain";
+      skycons.add(document.getElementById("conditions"), Skycons.RAIN);
+  } else if (conditions == "snow") {
+      conditionsDisplay.alt = "Snow";
+      skycons.add(document.getElementById("conditions"), Skycons.SNOW);
+  } else if (conditions == "sleet") {
+      conditionsDisplay.alt = "Sleet";
+      skycons.add(document.getElementById("conditions"), Skycons.SLEET);
+  } else if (conditions == "wind") {
+      conditionsDisplay.alt = "Windy";
+      skycons.add(document.getElementById("conditions"), Skycons.WIND);
+  } else if (conditions == "fog") {
+      conditionsDisplay.alt = "Foggy";
+      skycons.add(document.getElementById("conditions"), Skycons.FOG);
+  } else if (conditions == "partly-cloudy-day") {
+      conditionsDisplay.alt = "Party Cloudy";
+      skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_DAY);
+  } else if (conditions == "party-cloudy-night") {
+      conditionsDisplay.alt = "Partly Cloudy";
+      skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_NIGHT);
+  } else {
+      conditionsDisplay.alt = "Not sure...";
+      skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
   }
-  console.log(conditionsDisplay.src);
+
+  skycons.play();
 
 }
