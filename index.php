@@ -8,13 +8,13 @@
     <link rel="stylesheet" href="styles.css">
     <script async src="script.js"></script>
     <script src="skycons.js"></script>
-    <script src="csi.min.js" type="text/javascript"></script>
+    <!-- <script src="csi.min.js" type="text/javascript"></script> -->
   </head>
 
   <body>
     <div class="container">
        <canvas id="conditions" width="128" height="128"></canvas>
-       <div id="time" type="text">Time</div>
+       <div id="time" type="text">Loading...</div>
        <div id="date" type="text"></div>
     </div>
 
@@ -23,11 +23,11 @@
     </div>
 
 
-    <div class="Meliafooter1">
+    <div class="footerLeft">
   	 <a href="?run=true" ;="">Pull Updates from Github</a>
   	</div>
 
-    <div class="Meliafooter2">
+    <div class="footerRight">
   	 <a href="https://darksky.net/poweredby/">Weather Powered by Dark Sky</a>
   	</div>
 
@@ -46,6 +46,7 @@
 
     $weatherCurrentIcon = $forecast['currently']['icon'];
     $weatherCurrentTemp = $forecast['currently']['temperature'];
+    $weatherCurrentSummary = $forecast['currently']['summary'];
 
     if ($_GET['run']) {
       # This code will run if ?run=true is set.
@@ -59,5 +60,18 @@
       var weather = {};
       weather.conditions = "<?php echo $weatherCurrentIcon; ?>";
       weather.temp = <?php echo $weatherCurrentTemp; ?>;
+      //weather.summary = <?php echo $weatherCurrentSummary; ?>;
+
+      setTimeout(function() { checkPage(); }, 1000);
+
+      function checkPage() {
+        var timeDiv = document.getElementById('time');
+        textContent = timeDiv.textContent;
+
+        if (textContent.includes("Loading")) {
+          location.reload();
+        }
+      }
+
   </script>
 </html>

@@ -148,24 +148,24 @@ a {
 }
 
 
-.Meliafooter1{
+.footerLeft{
 	font-size: 20px;
 	color:#8F8E8C;
 	position:absolute;
 	left:40px;
 	bottom:20px;
 }
-.Meliafooter1 a{
+.footerLeft a{
 	color:#444;
 }
 
-.Meliafooter2{
+.footerRight{
 	font-size: 20px;
 	color:#8F8E8C;
 	position:absolute;
 	right:40px;
 	bottom:20px;
 }
-.Meliafooter2 a{
+.footerRight a{
 	color:#444;
 }
