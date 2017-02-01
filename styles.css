@@ -4,9 +4,6 @@ body {
     color: #eee;
 
     background-color: #222;
-    background: url("space.jpg") no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
 }
 body::-webkit-scrollbar {
     display: none
