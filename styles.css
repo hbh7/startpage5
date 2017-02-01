@@ -1,8 +1,12 @@
 body {
     font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
     margin: 0;
-    background: #222;
     color: #eee;
+
+    background-color: #222;
+    background: url("space.jpg") no-repeat center center;
+    background-size: cover;
+    background-attachment: fixed;
 }
 body::-webkit-scrollbar {
     display: none
@@ -118,6 +122,13 @@ a {
     -1px 1px 0 #000,
     1px 1px 0 #000;
   color: #ffffff;
+}
+
+#summary{
+  width: 100%;
+  font-family: Roboto;
+  font-size: 2.0rem;
+  color: #eee;
 }
 
 #time{

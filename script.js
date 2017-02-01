@@ -51,14 +51,18 @@ function dateInfo(){
 function dispayWeather(weather){
 
   console.log("New Condition: ", weather.conditions);
-  console.log("New Condition: ", weather.temp);
+  console.log("New Temp: ", weather.temp);
+  console.log("New Summary: ", weather.summary);
 
   var temp = Math.round(weather.temp);
   var conditions = weather.conditions;
+  var summary = weather.summary;
   var tempDisplay = document.getElementById("temperature");
+  var summaryDisplay = document.getElementById("summary");
   var conditionsDisplay = document.getElementById("conditions");
 
   tempDisplay.innerHTML = temp + "°  ";
+  summaryDisplay.innerHTML = summary;
 
   var skycons = new Skycons({"color": "white"});
 

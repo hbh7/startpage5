@@ -14,12 +14,14 @@
   <body>
     <div class="container">
        <canvas id="conditions" width="128" height="128"></canvas>
+       <div id="summary" type="text"></div>
        <div id="time" type="text">Loading...</div>
        <div id="date" type="text"></div>
     </div>
 
     <div style="text-align: center; width: 100%; margin-bottom: 2%;">
       <div style="display:inline" id="temperature" style="text"></div>
+      
     </div>
 
 
@@ -55,12 +57,16 @@
       header("Location: index.php");
     }
 
+    //Debug
+    //print_r($weatherCurrentSummary);
+    //print_r($forecast);
+
   ?>
   <script>
       var weather = {};
       weather.conditions = "<?php echo $weatherCurrentIcon; ?>";
       weather.temp = <?php echo $weatherCurrentTemp; ?>;
-      //weather.summary = <?php echo $weatherCurrentSummary; ?>;
+      weather.summary = "<?php echo $weatherCurrentSummary; ?>";
 
       setTimeout(function() { checkPage(); }, 1000);
 
