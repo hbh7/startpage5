@@ -21,6 +21,16 @@
     <div style="text-align: center; width: 100%; margin-bottom: 2%;">
       <div style="display:inline" id="temperature" style="text"></div>
     </div>
+
+
+    <div class="Meliafooter1">
+  	 <a href="?run=true" ;="">Pull Updates from Github</a>
+  	</div>
+
+    <div class="Meliafooter2">
+  	 <a href="https://darksky.net/poweredby/">Weather Powered by Dark Sky</a>
+  	</div>
+
   </body>
 
 
@@ -36,6 +46,13 @@
 
     $weatherCurrentIcon = $forecast['currently']['icon'];
     $weatherCurrentTemp = $forecast['currently']['temperature'];
+
+    if ($_GET['run']) {
+      # This code will run if ?run=true is set.
+      shell_exec("/var/www/updatestartpage");
+      sleep(5);
+      header("Location: index.php");
+    }
 
   ?>
   <script>
