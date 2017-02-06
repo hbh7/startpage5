@@ -9,9 +9,7 @@
     <script async src="script.js"></script>
     <script src="skycons.js"></script>
   </head>
-
   <body>
-
     <div class="container">
        <canvas id="conditions" width="128" height="128"></canvas>
        <div id="summary" type="text"></div>
