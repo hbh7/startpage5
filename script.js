@@ -67,37 +67,36 @@ function dispayWeather(weather){
   var skycons = new Skycons({"color": "white"});
 
   if (conditions == "cloudy") {
-      conditionsDisplay.alt = "Cloudy";
       skycons.add("conditions", Skycons.CLOUDY);
   } else if (conditions == "clear-day") {
-      conditionsDisplay.alt = "Clear Skies";
+	  console.log("Picking skycons.clear_day");
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
   } else if (conditions == "clear-night") {
-      conditionsDisplay.alt = "Clear Skies";
+	  console.log("Picking skycons.clear_night");
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_NIGHT);
   } else if (conditions == "Rain") {
-      conditionsDisplay.alt = "Rain";
+	  console.log("Picking skycons.rain");
       skycons.add(document.getElementById("conditions"), Skycons.RAIN);
   } else if (conditions == "snow") {
-      conditionsDisplay.alt = "Snow";
+	  console.log("Picking skycons.snow");
       skycons.add(document.getElementById("conditions"), Skycons.SNOW);
   } else if (conditions == "sleet") {
-      conditionsDisplay.alt = "Sleet";
+	  console.log("Picking skycons.sleet");
       skycons.add(document.getElementById("conditions"), Skycons.SLEET);
   } else if (conditions == "wind") {
-      conditionsDisplay.alt = "Windy";
+	  console.log("Picking skycons.wind");
       skycons.add(document.getElementById("conditions"), Skycons.WIND);
   } else if (conditions == "fog") {
-      conditionsDisplay.alt = "Foggy";
+	  console.log("Picking skycons.fog");
       skycons.add(document.getElementById("conditions"), Skycons.FOG);
   } else if (conditions == "partly-cloudy-day") {
-      conditionsDisplay.alt = "Party Cloudy";
+	  console.log("Picking skycons.partly_cloudy_day");
       skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_DAY);
   } else if (conditions == "party-cloudy-night") {
-      conditionsDisplay.alt = "Partly Cloudy";
+	  console.log("Picking skycons.partly_cloudy_night");
       skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_NIGHT);
   } else {
-      conditionsDisplay.alt = "Not sure...";
+	  console.log("Wasn't sure what to pick, so went with skycons.clear_day");
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
   }
 
