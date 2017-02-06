@@ -8,22 +8,17 @@
     <link rel="stylesheet" href="styles.css">
     <script async src="script.js"></script>
     <script src="skycons.js"></script>
-    <!-- <script src="csi.min.js" type="text/javascript"></script> -->
   </head>
 
   <body>
+
     <div class="container">
        <canvas id="conditions" width="128" height="128"></canvas>
        <div id="summary" type="text"></div>
        <div id="time" type="text">Loading...</div>
        <div id="date" type="text"></div>
+       <div id="temperature" style="display:inline" type="text"></div>
     </div>
-
-    <div style="text-align: center; width: 100%; margin-bottom: 2%;">
-      <div style="display:inline" id="temperature" style="text"></div>
-      
-    </div>
-
 
     <div class="footerLeft">
   	 <a href="?run=true" ;="">Pull Updates from Github</a>
@@ -34,8 +29,6 @@
   	</div>
 
   </body>
-
-
 
   <?php
     include 'DarkSky.php';
