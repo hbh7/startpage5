@@ -13,10 +13,10 @@
   <body>
     <div class="container">
        <canvas id="conditions" width="128" height="128"></canvas>
-       <div id="summary" type="text"></div>
-       <div id="time" type="text">Loading...</div>
-       <div id="date" type="text"></div>
-       <div id="temperature" type="text"></div>
+       <div id="summary"></div>
+       <div id="time">Loading...</div>
+       <div id="date"></div>
+       <div id="temperature"></div>
     </div>
 
     <div class="footerLeft">
