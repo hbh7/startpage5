@@ -49,7 +49,7 @@ a {
 }
 .container {
     text-align: center;
-    margin-top: 15%;
+    margin-top: 12%;
     position: fixed;
     left: 0;
     right: 0;
@@ -59,7 +59,7 @@ a {
 
 #temperature{
   font-size: 60px;
-  font-family: Masiode;
+  font-family: Roboto;
   font-weight: bolder;
 
   text-shadow:
@@ -72,8 +72,8 @@ a {
 
 #summary{
   width: 100%;
-  font-family: Roboto;
-  font-size: 2.0rem;
+  font-family: 'Pacifico', cursive;
+  font-size: 3.0rem;
   color: #eee;
 }
 
@@ -86,7 +86,7 @@ a {
 
 #date{
   width: 100%;
-  font-family: Roboto;
+  font-family: 'Pacifico', cursive;
   font-size: 3rem;
   color: #eee;
 }

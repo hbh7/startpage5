@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="styles.css">
     <script async src="script.js"></script>
     <script src="skycons.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
   </head>
   <body>
     <div class="container">
@@ -15,7 +16,7 @@
        <div id="summary" type="text"></div>
        <div id="time" type="text">Loading...</div>
        <div id="date" type="text"></div>
-       <div id="temperature" style="display:inline" type="text"></div>
+       <div id="temperature" type="text"></div>
     </div>
 
     <div class="footerLeft">
