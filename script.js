@@ -74,7 +74,7 @@ function dispayWeather(weather){
   } else if (conditions == "clear-night") {
 	  console.log("Picking skycons.clear_night");
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_NIGHT);
-  } else if (conditions == "Rain") {
+  } else if (conditions == "rain") {
 	  console.log("Picking skycons.rain");
       skycons.add(document.getElementById("conditions"), Skycons.RAIN);
   } else if (conditions == "snow") {
