@@ -60,7 +60,7 @@
       weather.temp = <?php echo $weatherCurrentTemp; ?>;
       weather.summary = "<?php echo $weatherCurrentSummary; ?>";
 
-      setTimeout(function() { checkPage(); }, 1000);
+      setTimeout(function() { checkPage(); }, 6000);
 
       function checkPage() {
         var timeDiv = document.getElementById('time');
