@@ -19,9 +19,9 @@
        <div id="temperature"></div>
     </div>
 
-    <div class="footerLeft">
+    <!--<div class="footerLeft">
   	 <a href="?run=true" ;="">Pull Updates from Github</a>
-  	</div>
+  	</div>-->
 
     <div class="footerRight">
   	 <a href="https://darksky.net/poweredby/">Weather Powered by Dark Sky</a>
@@ -33,7 +33,7 @@
     include 'DarkSky.php';
 
     // Creates an instance of the API wrapper.
-    $darksky = new DarkSky('6299a3300621e680018826a6928a21d1');
+    $darksky = new DarkSky('REDACTED');
 
     // Returns a forecast for the next hour at a specific location
     $forecast = $darksky->getForecast(41.813099, -73.115601);
@@ -42,12 +42,12 @@
     $weatherCurrentTemp = $forecast['currently']['temperature'];
     $weatherCurrentSummary = $forecast['currently']['summary'];
 
-    if ($_GET['run']) {
-      # This code will run if ?run=true is set.
-      shell_exec("/var/www/updatestartpage");
-      sleep(5);
-      header("Location: index.php");
-    }
+    //if ($_GET['run']) {
+    //  # This code will run if ?run=true is set.
+    //  shell_exec("/var/www/updatestartpage");
+    //  sleep(5);
+    //  header("Location: index.php");
+    //}
 
     //Debug
     //print_r($weatherCurrentSummary);
