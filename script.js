@@ -40,6 +40,9 @@ function dateInfo(){
    if(hour > 12)
     hour = hour - 12;
 
+   if(hour == 0)
+    hour = 12;
+
 
   ampm = (date.getHours() >= 12)? ' pm' : ' am';
 
