@@ -36,7 +36,7 @@
     $darksky = new DarkSky('REDACTED');
 
     // Returns a forecast for the next hour at a specific location
-    $forecast = $darksky->getForecast(41.813099, -73.115601);
+    $forecast = $darksky->getForecast(42.727229, -73.675100);
 
     $weatherCurrentIcon = $forecast['currently']['icon'];
     $weatherCurrentTemp = $forecast['currently']['temperature'];
