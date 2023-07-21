@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: Git Pull
+      - name: GitPull
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://start.hbh7.com/update.php'
@@ -19,4 +19,4 @@ jobs:
           contentType: application/x-www-form-urlencoded
           data: key=${{ secrets.CICD_KEY }}
       - name: Show Response
-        run: echo ${{ steps.Deploy.outputs.response }}
+        run: echo ${{ steps.GitPull.outputs.response }}
