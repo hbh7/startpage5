@@ -1,111 +1,61 @@
 body {
-    font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
-    margin: 0;
-    color: #eee;
-
-    background-color: #000;
-    background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url("Blue_Line.jpg") no-repeat center center;
-    background-size: cover;
-    background-attachment: fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  margin: 0;
+  color: #fff;
+  /* Background properties are intentionally split due to issues encountered when combining */
+  background-color: #000;
+  background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url("background.jpg") no-repeat center center;
+  background-size: cover;
+  background-attachment: fixed;
 }
+
 body::-webkit-scrollbar {
-    display: none
+  display: none
 }
+
 a {
-    text-decoration: none;
-    color: #eee
+  text-decoration: none;
 }
-.section {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center
-}
-@media only screen and (max-width: 45em) {
-    .list {
-        max-width: 95vw;
-        margin: 0 5px
-    }
-    .textbox {
-        width: 90vw
-    }
-    .list ul {
-        -webkit-transition: 800ms max-height ease-out;
-        transition: 800ms max-height ease-out;
-        overflow: hidden;
-        max-height: 0;
-        transition-delay: .2s
-    }
-    .list:hover ul li,
-    .list:hover>ul {
-        max-height: 800px;
-        display: block
-    }
-    .list ul li {
-        display: none
-    }
-}
+
 .container {
-    text-align: center;
-    margin-top: 12%;
-    position: fixed;
-    left: 0;
-    right: 0;
-    z-index: 9999;
-
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  text-align: center;
 }
 
-#temperature{
+#temperature {
   font-size: 60px;
-  font-family: Roboto, serif;
+  font-family: 'Roboto', serif;
   font-weight: bolder;
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000;
-  color: #ffffff;
 }
 
-#summary{
-  width: 100%;
+#summary {
   font-family: 'Pacifico', cursive;
   font-size: 3.0rem;
-  color: #eee;
 }
 
-#time{
-  width: 100%;
-  font-family: Roboto, serif;
+#time {
+  font-family: 'Roboto', serif;
   font-size: 5.5rem;
-  color: #eee;
 }
 
-#date{
-  width: 100%;
+#date {
   font-family: 'Pacifico', cursive;
   font-size: 3rem;
-  color: #eee;
 }
 
-.footerLeft{
-	font-size: 20px;
-	position:absolute;
-	left:40px;
-	bottom:20px;
-}
-.footerLeft a{
-	color:#777;
+.footerRight {
+  font-size: 20px;
+  text-align: right;
+  position: absolute;
+  right: 20px;
+  bottom: 20px;
 }
 
-.footerRight{
-	font-size: 20px;
-	position:absolute;
-	right:40px;
-	bottom:20px;
-}
-.footerRight a{
-	color:#777;
+.footerRight a {
+  color: #777;
 }

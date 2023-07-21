@@ -1,15 +1,22 @@
 // Set up constants for the clock
-let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
+/**
+ * Get the user's location through geolocation browser API and call appropriate handler function.
+ */
 function getLocation() {
    if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(getWeather, showError);
    } else {
-      document.getElementById("summary").innerText = "Geolocation not supported/enabled, no weather available.";
+      showError("Geolocation not supported/enabled, no weather available.");
    }
 }
 
+/**
+ * Gather weather information based on provided position data, and send to displayWeather function is available.
+ * @param position information from navigator.geolocation.getCurrentPosition().
+ */
 function getWeather(position) {
    // Make a request to weather.php with the user's location
    const Http = new XMLHttpRequest();
@@ -22,7 +29,7 @@ function getWeather(position) {
       // Check for problems and process the request data if available
       if (Http.readyState === 4) {
          try {
-            let weather = JSON.parse(Http.responseText);
+            const weather = JSON.parse(Http.responseText);
             if (weather != null) {
                if (weather["error"]) {
                   showError(weather["error"]);
@@ -30,8 +37,8 @@ function getWeather(position) {
                   setTimeout(getLocation, 30000);
                } else {
                   displayWeather(weather);
-                  // Refresh in 15 minutes
-                  setTimeout(getLocation, 150000);
+                  // Refresh in 1 hour
+                  setTimeout(getLocation, 600000);
                }
             }
          } catch {
@@ -43,6 +50,10 @@ function getWeather(position) {
    }
 }
 
+/**
+ * Process errors and display them on the webpage for the user, as well as in the console for debugging.
+ * @param error either a string or object with error information.
+ */
 function showError(error) {
    let loadingSpan = document.getElementById("summary");
    console.log("An error occurred with the weather system:")
@@ -69,18 +80,21 @@ function showError(error) {
    }
 }
 
+/**
+ * Gathers time and date information and automatically updates the information on the page every second.
+ */
 function updateClock() {
-   let date = new Date;
+   const date = new Date;
    // Adjust the 0-23 hour for 12 hour time
-   let hour = date.getHours() === 0 ? 12 : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours());
+   const hour = date.getHours() === 0 ? 12 : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours());
    // Pad the minutes and seconds with a leading zero
-   let minute = (date.getMinutes() < 10 ? "0": "") + date.getMinutes();
-   let second = (date.getSeconds() < 10 ? "0": "") + date.getSeconds();
-   let dayOfWeek = days[date.getDay()];
-   let dayOfMonth = date.getDate();
-   let month = months[date.getMonth()];
-   let year = date.getFullYear();
-   let ampm = (date.getHours() >= 12) ? ' pm' : ' am';
+   const minute = (date.getMinutes() < 10 ? "0": "") + date.getMinutes();
+   const second = (date.getSeconds() < 10 ? "0": "") + date.getSeconds();
+   const dayOfWeek = days[date.getDay()];
+   const dayOfMonth = date.getDate();
+   const month = months[date.getMonth()];
+   const year = date.getFullYear();
+   const ampm = (date.getHours() >= 12) ? ' pm' : ' am';
 
    // Display everything
    document.getElementById("time").innerText = hour + ":" + minute + ":" + second + ampm;
@@ -90,11 +104,15 @@ function updateClock() {
    setTimeout(updateClock, 1000);
 }
 
+/**
+ * Formats and displays provided weather data on the page.
+ * @param weather an object containing weather data.
+ */
 function displayWeather(weather) {
    // Set up variables from weather data
-   let temp = Math.round(weather["currently"]["temperature"]);
-   let icon = weather["currently"]["icon"];
-   let summary = weather["currently"]["summary"];
+   const temp = Math.round(weather["currently"]["temperature"]);
+   const icon = weather["currently"]["icon"];
+   const summary = weather["currently"]["summary"];
 
    // Set up outputs
    let tempDisplay = document.getElementById("temperature");
@@ -133,10 +151,17 @@ function displayWeather(weather) {
    skycons.play();
 }
 
-
-window.onload = function () {
+/**
+ * Runs when the page is loaded, starts the other data update functions.
+ */
+function start() {
+   console.log("Started script.")
    // Get the user's location (will also show the weather after)
    getLocation();
    // Start the clock
    updateClock();
 }
+
+window.addEventListener ?
+   window.addEventListener("load", start,false) :
+   window.attachEvent && window.attachEvent("onload", start);
