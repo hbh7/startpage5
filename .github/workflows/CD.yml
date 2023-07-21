@@ -10,13 +10,14 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
-      - name: GitPull
+      - name: Git Pull
+        id: GitPull
         uses: fjogeleit/http-request-action@v1
         with:
           url: 'https://start.hbh7.com/update.php'
           method: 'POST'
           timeout: 60000 # 60 second timeout, should only need about 10s
           contentType: application/x-www-form-urlencoded
-          data: key=${{ secrets.CICD_KEY }}
+          data: CICD_KEY=${{ secrets.CICD_KEY }}
       - name: Show Response
         run: echo ${{ steps.GitPull.outputs.response }}
