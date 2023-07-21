@@ -4,7 +4,6 @@ body {
     color: #eee;
 
     background-color: #000;
-    /* Background from : http://www.wallpaperhi.com/Art/Minimalistic/abstract_minimalistic_grunge_backgrounds_1920x1200_wallpaper_87457 */
     background: linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.85)), url("Blue_Line.jpg") no-repeat center center;
     background-size: cover;
     background-attachment: fixed;
@@ -60,11 +59,10 @@ a {
 
 #temperature{
   font-size: 60px;
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-weight: bolder;
-
   text-shadow:
-  -1px -1px 0 #000,
+    -1px -1px 0 #000,
     1px -1px 0 #000,
     -1px 1px 0 #000,
     1px 1px 0 #000;
@@ -80,7 +78,7 @@ a {
 
 #time{
   width: 100%;
-  font-family: Roboto;
+  font-family: Roboto, serif;
   font-size: 5.5rem;
   color: #eee;
 }

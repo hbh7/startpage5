@@ -1,108 +1,142 @@
-window.onload = function() {
+// Set up constants for the clock
+let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+let days = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-    count = -1;
-    input = document.getElementById("input");
-
-    dateInfo()
-    dispayWeather(weather);
+function getLocation() {
+   if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(getWeather, showError);
+   } else {
+      document.getElementById("summary").innerText = "Geolocation not supported/enabled, no weather available.";
+   }
 }
 
-function dateInfo(){
+function getWeather(position) {
+   // Make a request to weather.php with the user's location
+   const Http = new XMLHttpRequest();
+   const url = "/weather.php?lat=" + position.coords.latitude + "&lon=" + position.coords.longitude;
+   Http.open("GET", url);
+   Http.send();
 
-  var months = ["January","February","March","April","May","June","July","August","September","October","November","December"];
-  var days = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
-  var timeDisplay = document.getElementById("time");
-  var dateDisplay = document.getElementById("date");
-
-  var date = new Date,
-      hour = date.getHours(),
-      minute = date.getMinutes(),
-      second = date.getSeconds();
-      day = date.getDay();
-      month = date.getMonth();
-      year = date.getFullYear();
-      numberDate = date.getDate();
-
-  hour = date.getHours();
-
-  if(date.getMinutes() < 10)
-    minute = "0" + date.getMinutes();
-  else {
-    minute = date.getMinutes();
-  }
-
-  if(date.getSeconds() < 10)
-    second = "0" + date.getSeconds();
-  else {
-    second = date.getSeconds();
-  }
-
-   if(hour > 12)
-    hour = hour - 12;
-
-   if(hour == 0)
-    hour = 12;
-
-
-  ampm = (date.getHours() >= 12)? ' pm' : ' am';
-
-  timeDisplay.innerHTML = hour + ":" + minute + ":" + second + ampm;
-  dateDisplay.innerHTML = days[day] + ", " + months[month] + " " + numberDate + ", " + year;
-  setTimeout("dateInfo()",1000);
+   // Once the request is complete, use the data to update the page
+   Http.onreadystatechange = (e) => {
+      // Check for problems and process the request data if available
+      if (Http.readyState === 4) {
+         try {
+            let weather = JSON.parse(Http.responseText);
+            if (weather != null) {
+               if (weather["error"]) {
+                  showError(weather["error"]);
+                  // Retry in 30 seconds
+                  setTimeout(getLocation, 30000);
+               } else {
+                  displayWeather(weather);
+                  // Refresh in 15 minutes
+                  setTimeout(getLocation, 150000);
+               }
+            }
+         } catch {
+            showError("A JSON parse error occurred.");
+            // Retry in 30 seconds
+            setTimeout(getLocation, 30000);
+         }
+      }
+   }
 }
 
-function dispayWeather(weather){
+function showError(error) {
+   let loadingSpan = document.getElementById("summary");
+   console.log("An error occurred with the weather system:")
+   console.log(error);
+   // Switch between error types: from the HTTP request / location request, or
+   if (typeof(error) === "string") {
+      loadingSpan.innerText = "An error occurred, no weather available.";
+   } else {
+      switch (error.code) {
+         case error.PERMISSION_DENIED:
+            loadingSpan.innerText = "Request for location was denied, no weather available.";
+            break;
+         case error.POSITION_UNAVAILABLE:
+            loadingSpan.innerText = "Location information is unavailable, no weather available.";
+            break;
+         case error.TIMEOUT:
+            loadingSpan.innerText = "Location request timed out, no weather available.";
+            break;
+         case error.UNKNOWN_ERR:
+         default:
+            loadingSpan.innerText = "An error occurred, no weather available.";
+            break;
+      }
+   }
+}
 
-  console.log("New Condition: ", weather.conditions);
-  console.log("New Temp: ", weather.temp);
-  console.log("New Summary: ", weather.summary);
+function updateClock() {
+   let date = new Date;
+   // Adjust the 0-23 hour for 12 hour time
+   let hour = date.getHours() === 0 ? 12 : (date.getHours() > 12 ? date.getHours() - 12 : date.getHours());
+   // Pad the minutes and seconds with a leading zero
+   let minute = (date.getMinutes() < 10 ? "0": "") + date.getMinutes();
+   let second = (date.getSeconds() < 10 ? "0": "") + date.getSeconds();
+   let dayOfWeek = days[date.getDay()];
+   let dayOfMonth = date.getDate();
+   let month = months[date.getMonth()];
+   let year = date.getFullYear();
+   let ampm = (date.getHours() >= 12) ? ' pm' : ' am';
 
-  var temp = Math.round(weather.temp);
-  var conditions = weather.conditions;
-  var summary = weather.summary;
-  var tempDisplay = document.getElementById("temperature");
-  var summaryDisplay = document.getElementById("summary");
-  var conditionsDisplay = document.getElementById("conditions");
+   // Display everything
+   document.getElementById("time").innerText = hour + ":" + minute + ":" + second + ampm;
+   document.getElementById("date").innerText = dayOfWeek + ", " + month + " " + dayOfMonth + ", " + year;
 
-  tempDisplay.innerHTML = temp + "°  ";
-  summaryDisplay.innerHTML = summary;
+   // Set a timer to update the clock again
+   setTimeout(updateClock, 1000);
+}
 
-  var skycons = new Skycons({"color": "white"});
+function displayWeather(weather) {
+   // Set up variables from weather data
+   let temp = Math.round(weather["currently"]["temperature"]);
+   let icon = weather["currently"]["icon"];
+   let summary = weather["currently"]["summary"];
 
-  if (conditions == "cloudy") {
+   // Set up outputs
+   let tempDisplay = document.getElementById("temperature");
+   let summaryDisplay = document.getElementById("summary");
+
+   // Display data
+   tempDisplay.innerHTML = temp + "°";
+   summaryDisplay.innerHTML = summary;
+
+   // Display icon
+   let skycons = new Skycons({"color": "white"});
+   if (icon === "cloudy") {
       skycons.add("conditions", Skycons.CLOUDY);
-  } else if (conditions == "clear-day") {
-	  console.log("Picking skycons.clear_day");
+   } else if (icon === "clear-day") {
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
-  } else if (conditions == "clear-night") {
-	  console.log("Picking skycons.clear_night");
+   } else if (icon === "clear-night") {
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_NIGHT);
-  } else if (conditions == "rain") {
-	  console.log("Picking skycons.rain");
+   } else if (icon === "rain") {
       skycons.add(document.getElementById("conditions"), Skycons.RAIN);
-  } else if (conditions == "snow") {
-	  console.log("Picking skycons.snow");
+   } else if (icon === "snow") {
       skycons.add(document.getElementById("conditions"), Skycons.SNOW);
-  } else if (conditions == "sleet") {
-	  console.log("Picking skycons.sleet");
+   } else if (icon === "sleet") {
       skycons.add(document.getElementById("conditions"), Skycons.SLEET);
-  } else if (conditions == "wind") {
-	  console.log("Picking skycons.wind");
+   } else if (icon === "wind") {
       skycons.add(document.getElementById("conditions"), Skycons.WIND);
-  } else if (conditions == "fog") {
-	  console.log("Picking skycons.fog");
+   } else if (icon === "fog") {
       skycons.add(document.getElementById("conditions"), Skycons.FOG);
-  } else if (conditions == "partly-cloudy-day") {
-	  console.log("Picking skycons.partly_cloudy_day");
+   } else if (icon === "partly-cloudy-day") {
       skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_DAY);
-  } else if (conditions == "party-cloudy-night") {
-	  console.log("Picking skycons.partly_cloudy_night");
+   } else if (icon === "party-cloudy-night") {
       skycons.add(document.getElementById("conditions"), Skycons.PARTLY_CLOUDY_NIGHT);
-  } else {
-	  console.log("Wasn't sure what to pick, so went with skycons.clear_day");
+   } else {
+      console.log("Unknown weather condition: " + icon + ", picking skycons.clear_day");
       skycons.add(document.getElementById("conditions"), Skycons.CLEAR_DAY);
-  }
+   }
+   skycons.play();
+}
 
-  skycons.play();
 
+window.onload = function () {
+   // Get the user's location (will also show the weather after)
+   getLocation();
+   // Start the clock
+   updateClock();
 }
