@@ -20,4 +20,4 @@ jobs:
           contentType: application/x-www-form-urlencoded
           data: CICD_KEY=${{ secrets.CICD_KEY }}
       - name: Show Response
-        run: echo ${{ steps.GitPull.outputs.response }}
+        run: printf ${{ steps.GitPull.outputs.response }}
