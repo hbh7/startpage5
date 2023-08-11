@@ -3,11 +3,13 @@
 // Check that latitude and longitude values were provided before initializing anything
 if (!isset($_GET["lat"])) {
    $output["error"] = "Latitude not supplied";
+   http_response_code(400);
    echo json_encode($output);
    die;
 }
 if (!isset($_GET["lon"])) {
    $output["error"] = "Longitude not supplied";
+   http_response_code(400);
    echo json_encode($output);
    die;
 }
@@ -38,6 +40,7 @@ class PirateWeather
       $this->apiKey = $env["API_KEY"];
       if ($this->apiKey == null) {
          $output["error"] = "API Key not supplied in ENV file.";
+         http_response_code(500);
          echo json_encode($output);
          die;
       }
@@ -68,6 +71,7 @@ class PirateWeather
       $response = file_get_contents($url);
       if ($response === false) {
          $output["error"] = "Unknown error occurred while contacting the weather API.";
+         http_response_code(500);
          echo json_encode($output);
          die;
       }
@@ -88,6 +92,7 @@ class PirateWeather
          }
 
          $output["error"] = "An error occurred while contacting the weather API: " . $reason;
+         http_response_code(500);
          echo json_encode($output);
          die;
       }
